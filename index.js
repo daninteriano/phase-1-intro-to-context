@@ -38,7 +38,6 @@ function allWagesFor(record){
 function calculatePayroll(arrayRecord){
    //using wagesEarnedOneDate, ACCUMULATE value of ALL DATES worked in RECORD
    let employeesDates = arrayRecord.map(function(employee){return employee.timeInEvents.date})
-    let recordObject =  
 
     //return the SUM of pay owed to ALL Employees for ALL DATES
    return employeesDates.reduce(function(one, date){return one + wagesEarnedOnDate(recordObject, date)}, 0)
