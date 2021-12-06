@@ -17,7 +17,6 @@ function createEmployeeRecord(array){
 
 function hoursWorkedOnDate(record, yearToDateStamp){
     let timeInDateMatch = record.timeInEvents.find((object) => object['date'] === yearToDateStamp).hour;
-    debugger;
     let timeOutDateMatch = record.timeOutEvents.find((object) => object['date'] === yearToDateStamp).hour;
    
       return timeOutDateMatch/100 - timeInDateMatch/100
@@ -29,18 +28,22 @@ function hoursWorkedOnDate(record, yearToDateStamp){
  } 
 
 function allWagesFor(record){
-    let dates = record.timeInEvents.filter(function(objects){return objects.date}).date
-    //wagesEarnedOnDate(record, date)
-    let wagesAccumulated = dates.map((date) => wagesEarnedOnDate(record, date)).reduce()
-    //accumulate VALUE of ALL DATES from record
+    let dates = record.timeInEvents.map(function(calendar){return calendar.date})
     
-    //return pay owed for ALL DATES
+    let wagesAccumulated = dates.reduce(function(one, date){return one + wagesEarnedOnDate(record, date)}, 0)
+
     return wagesAccumulated;
 }
 
-/*function calculatePayroll(record){
+function calculatePayroll(arrayRecord){
+   //using wagesEarnedOneDate, ACCUMULATE value of ALL DATES worked in RECORD
+   let employeesDates = arrayRecord.map(function(employee){return employee.timeInEvents.date})
+    let recordObject =  
 
-}*/
+    //return the SUM of pay owed to ALL Employees for ALL DATES
+   return employeesDates.reduce(function(one, date){return one + wagesEarnedOnDate(recordObject, date)}, 0)
+ 
+    }
 
 function createEmployeeRecords(array){
     return array.map((item) => { return createEmployeeRecord(item)})
